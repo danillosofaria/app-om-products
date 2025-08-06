@@ -1,4 +1,7 @@
+import "./NavBar.css"
+
 function NavBar () {
+    return(
     <div className="navbar">
         <img src="src\assets\logo_OM_branco.svg" alt="logo_om" />
         <ul>
@@ -6,6 +9,7 @@ function NavBar () {
             <li>login</li>
         </ul>
     </div>
+    );
 }
 
 export default NavBar

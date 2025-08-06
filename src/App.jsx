@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <NavBar></NavBar>
-      <h1>lista de produtos M5</h1>
+      <h1>lista de produtos M5-xxxx</h1>
       <ProdutosList></ProdutosList>
     </>
   )
