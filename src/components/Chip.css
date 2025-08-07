@@ -1,0 +1,14 @@
+.chip {
+    background-color: rgb(255, 255, 255);
+    border: 0.1rem solid rgba(108, 55, 151, 0.103);
+    box-shadow: 0 2px 8px rgba(108, 55, 151, 0.116);
+    color: rgb(129, 90, 161);
+    padding: 0.25rem 0.75rem;
+    border-radius: 10rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.chip:empty {
+  display: none;
+}

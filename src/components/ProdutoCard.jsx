@@ -1,3 +1,4 @@
+import Chip from "./Chip";
 import "./ProdutoCard.css";
 
 function ProdutoCard({ produto }) {
@@ -16,15 +17,19 @@ function ProdutoCard({ produto }) {
         alt={produto.name}
         className="card-img"
       />
-      <div className="card-text">
-        <p className="card-code">M5-{produto.code}</p>
-        <h2 className="card-title">{produto.name}</h2>
-        <p className="card-description">{produto.descricao}</p>
-        <p className="card-ficha">{produto.fm}</p>
-      </div>
-      <div style={{ display: "flex", gap: 4 }}>
-        <span className="card-category">{produto.familia}</span>
-        <span className="card-category">{produto.aplicacao}</span>
+      <div className="card-content">
+        <div className="card-text">
+          <p className="card-code">M5-{produto.code}</p>
+          <h2 className="card-title">{produto.name}</h2>
+          <p className="card-description">2700K, 5,6W, 280lm, 2700K, Medium 33°, ø28mm</p>
+          {/* <p className="card-description">{produto.descricao}</p> */}
+          <p className="card-ficha">{produto.fm}</p>
+        </div>
+        <div className="card-chips">
+            <Chip label={produto.familia}/>
+            <Chip label={produto.aplicacao}/>
+            <Chip label={produto.ip}/>
+        </div>
       </div>
     </div>
   );
