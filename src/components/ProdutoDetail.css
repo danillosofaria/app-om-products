@@ -1,0 +1,54 @@
+.produto-detail {
+    color: black;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: start;
+    justify-content: center;
+}
+
+.produto-detail h1 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: #3f3f3f;
+}
+
+.produto-detail form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.produto-detail label {
+  font-weight: bold;
+  color: #555;
+}
+
+.produto-detail input {
+  padding: 8px 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.produto-detail button {
+  background-color: #4A90E2;
+  color: white;
+  padding: 10px 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.produto-detail button:hover {
+  background-color: #357ABD;
+}
+
+.error {
+  color: #e63946;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}

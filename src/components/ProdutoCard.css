@@ -35,7 +35,7 @@
 }
 
 .card-title {
-  font-size: 1.25rem;
+  font-size: 1rem;
   color: rgb(63, 63, 63);
   font-weight: bold;
 }
@@ -46,7 +46,7 @@
 }
 
 .card-code {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: bold;
   color: rgb(129, 90, 161);
 }
@@ -60,4 +60,63 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
+}
+
+.card-entrega {
+  font-size: 1rem;
+  color: #3b3b3b;
+}
+
+.card-urgente {
+  border: 2px solid #e63946; /* borda vermelha para destaque */
+}
+
+.alerta-urgente {
+  color: #e63946;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.link-ficha {
+  background-color: #cfcfcf;
+  padding: 0.2rem 0.8rem;
+  border-radius: 100rem;
+}
+
+.card-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-align: center;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.btn-pdf {
+  background-color: #825AA1;
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-pdf:hover {
+  background-color: #6a4586;
+}
+
+.btn-edit {
+  background-color: #4A90E2;
+  color: white;
+  border: none;
+}
+
+.btn-edit:hover {
+  background-color: #357ABD;
 }

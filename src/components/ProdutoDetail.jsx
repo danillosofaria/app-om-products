@@ -1,12 +1,16 @@
-import { useState } from "react";
-import { supabase } from "../supabaseClient"; // ajuste o caminho se necessário
-import "./AddProduct.css";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { supabase } from "../supabaseClient";
+import "./ProdutoDetail.css";
 
-function AddProduct() {
-  const familias = ["Spot On", "Linear", "Diffuse"];
-  const produtos = ["Nub", "inFinit", "Tua"];
-  const ips = ["IP20", "IP44", "IP65"];
-  const aplicacoes = ["Recessed", "Surface", "Pendant"];
+const familias = ["Spot On", "Linear", "Diffuse"];
+const produtos = ["Nub", "inFinit", "Tua"];
+const ips = ["IP20", "IP44", "IP65"];
+const aplicacoes = ["Recessed", "Surface", "Pendant"];
+
+export default function ProdutoDetail() {
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     code: "",
@@ -15,11 +19,44 @@ function AddProduct() {
     ip: "",
     aplicacao: "Recessed",
     fm: false,
-    data_entrega: "", // nova coluna para data
-    ficha_url: "",    // nova coluna para URL da ficha técnica
+    data_entrega: "",
+    ficha_url: "",
     image_url:
       "https://ntxziswczaigmgvlvwep.supabase.co/storage/v1/object/public/imagens/thumbs/placeholder-image.jpg",
   });
+
+  const [loading, setLoading] = useState(true);
+
+  // Puxa o produto do Supabase ao montar o componente
+  useEffect(() => {
+    async function fetchProduto() {
+      const { data, error } = await supabase
+        .from("produtos")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+      if (error) {
+        alert("Produto não encontrado");
+        navigate("/");
+      } else {
+        // Preenche o formulário com os dados do produto
+        setForm({
+          code: data.code || "",
+          familia: data.familia || "",
+          name: data.name || "",
+          ip: data.ip || "",
+          aplicacao: data.aplicacao || "Recessed",
+          fm: data.fm || false,
+          data_entrega: data.data_entrega || "",
+          ficha_url: data.ficha_url || "",
+          image_url: data.image_url || "https://ntxziswczaigmgvlvwep.supabase.co/storage/v1/object/public/imagens/thumbs/placeholder-image.jpg",
+        });
+      }
+      setLoading(false);
+    }
+    fetchProduto();
+  }, [id, navigate]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -29,32 +66,27 @@ function AddProduct() {
     }));
   };
 
+  // Atualiza o produto no banco
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { data, error } = await supabase.from("produtos").insert([form]);
+    const { error } = await supabase
+      .from("produtos")
+      .update(form)
+      .eq("id", id);
 
     if (error) {
-      alert("Erro ao adicionar produto: " + error.message);
+      alert("Erro ao atualizar produto: " + error.message);
     } else {
-      alert("Produto adicionado com sucesso!");
-      setForm({
-        code: "",
-        familia: "",
-        name: "",
-        ip: "",
-        aplicacao: "Recessed",
-        fm: false,
-        data_entrega: "",
-        ficha_url: "",
-        image_url:
-          "https://ntxziswczaigmgvlvwep.supabase.co/storage/v1/object/public/imagens/thumbs/placeholder-image.jpg",
-      });
+      alert("Produto atualizado com sucesso!");
+      navigate("/");
     }
   };
 
+  if (loading) return <p>Carregando...</p>;
+
   return (
-    <form className="add-product container" onSubmit={handleSubmit}>
+    <form className="produto-detail container" onSubmit={handleSubmit}>
       <label htmlFor="code">Código M5:</label>
       <input
         type="text"
@@ -138,7 +170,6 @@ function AddProduct() {
         />
       </label>
 
-      {/* Campo de data de entrega */}
       <label htmlFor="data_entrega">Data de entrega:</label>
       <input
         type="date"
@@ -149,7 +180,6 @@ function AddProduct() {
         required
       />
 
-      {/* Campo para URL da ficha técnica */}
       <label htmlFor="ficha_url">URL da Ficha Técnica (PDF):</label>
       <input
         type="url"
@@ -160,9 +190,7 @@ function AddProduct() {
         placeholder="https://exemplo.com/ficha.pdf"
       />
 
-      <button type="submit">Add</button>
+      <button type="submit">Salvar</button>
     </form>
   );
 }
-
-export default AddProduct;

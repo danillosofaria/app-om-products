@@ -1,3 +1,9 @@
-.add-product {
+.add-product{
     color: black;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: start;
+    justify-content: center;
 }
